@@ -29,6 +29,5 @@ return [
             'simple_bus.command_bus.delegates_to_message_handler_middleware' => ['priority' => -1000],
         ],
         'command_map' => [],
-        'handlers' => [],
     ],
 ];
