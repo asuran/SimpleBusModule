@@ -1,0 +1,32 @@
+{
+    "name": "riskio/simple-bus-module",
+    "description": "SimpleBus library integration into Zend Framework 2",
+    "homepage": "https://github.com/RiskioFr/SimpleBusModule",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.riskio.fr"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+        "simple-bus/message-bus": "~2.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.7",
+        "zendframework/zend-servicemanager": "~2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Riskio\\SimpleBusModule\\": "src/"
+        },
+        "classmap": [
+            "Module.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Riskio\\SimpleBusModuleTest\\": "tests/"
+        }
+    }
+}
