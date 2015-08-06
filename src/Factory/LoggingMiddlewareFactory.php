@@ -10,7 +10,7 @@ class LoggingMiddlewareFactory implements FactoryInterface
 {
     /**
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return LoggingMiddlewareFactory
+     * @return LoggingMiddleware
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
