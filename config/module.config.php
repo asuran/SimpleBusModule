@@ -15,7 +15,7 @@ return [
             'simple_bus.command_bus.command_handler_resolver' => 'Riskio\SimpleBusModule\Factory\CommandHandlerResolverFactory',
             'simple_bus.command_bus.delegates_to_message_handler_middleware' => 'Riskio\SimpleBusModule\Factory\DelegatesToMessageHandlerMiddlewareFactory',
             'simple_bus.command_bus.logging_middleware' => 'Riskio\SimpleBusModule\Factory\LoggingMiddlewareFactory',
-            'simple_bus.command_bus.wraps_message_handling_in_transaction_middleware' => 'Riskio\SimpleBusModule\Factory\LoggingMiddlewareFactory',
+            'simple_bus.command_bus.wraps_message_handling_in_transaction_middleware' => 'Riskio\SimpleBusModule\Factory\WrapsMessageHandlingInTransactionFactory',
         ],
         'aliases' => [
             'command_bus' => 'simple_bus.command_bus',

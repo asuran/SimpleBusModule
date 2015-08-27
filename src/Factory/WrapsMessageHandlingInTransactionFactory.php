@@ -13,7 +13,7 @@ class WrapsMessageHandlingInTransactionFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $entityManager = $serviceLocator->get('doctrine.orm.entitymanager');
+        $entityManager = $serviceLocator->get('Doctrine\ORM\EntityManager');
 
         return new WrapsMessageHandlingInTransaction($entityManager);
     }
