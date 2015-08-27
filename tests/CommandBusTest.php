@@ -1,6 +1,7 @@
 <?php
 namespace Riskio\SimpleBusModuleTest;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
@@ -17,6 +18,9 @@ class CommandBusTest extends \PHPUnit_Framework_TestCase
 
         $logger = $this->getMock(LoggerInterface::class);
         $serviceManager->setService('logger', $logger);
+
+        $entityManager = $this->getMock(EntityManagerInterface::class);
+        $serviceManager->setService('Doctrine\ORM\EntityManager', $entityManager);
 
         /* @var $commandBus MessageBusSupportingMiddleware */
         $commandBus = $serviceManager->get('command_bus');
