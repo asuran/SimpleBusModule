@@ -1,20 +1,20 @@
 <?php
 namespace Riskio\SimpleBusModule\Factory;
 
-use Riskio\SimpleBusModule\Middleware\WrapsMessageHandlingInTransaction;
+use Riskio\SimpleBusModule\Middleware\DoctrineWrapsMessageHandlingInTransaction;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class WrapsMessageHandlingInTransactionFactory implements FactoryInterface
+class DoctrineWrapsMessageHandlingInTransactionFactory implements FactoryInterface
 {
     /**
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return WrapsMessageHandlingInTransaction
+     * @return DoctrineWrapsMessageHandlingInTransaction
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $entityManager = $serviceLocator->get('Doctrine\ORM\EntityManager');
 
-        return new WrapsMessageHandlingInTransaction($entityManager);
+        return new DoctrineWrapsMessageHandlingInTransaction($entityManager);
     }
 }

@@ -4,7 +4,7 @@ namespace Riskio\SimpleBusModule\Middleware;
 use Doctrine\ORM\EntityManagerInterface;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
-class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
+class DoctrineWrapsMessageHandlingInTransaction implements MessageBusMiddleware
 {
     /**
      * @var EntityManagerInterface
