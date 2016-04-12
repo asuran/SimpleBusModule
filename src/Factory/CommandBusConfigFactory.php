@@ -1,19 +1,12 @@
 <?php
 namespace Riskio\SimpleBusModule\Factory;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 
-class CommandBusConfigFactory implements FactoryInterface
+class CommandBusConfigFactory
 {
-    /**
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return array
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container) : array
     {
-        $config = $serviceLocator->get('Config');
-
-        return $config['command_bus'];
+        return $container->get('Config')['command_bus'];
     }
 }

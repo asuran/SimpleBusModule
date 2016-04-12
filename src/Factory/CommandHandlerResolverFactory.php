@@ -1,23 +1,19 @@
 <?php
 namespace Riskio\SimpleBusModule\Factory;
 
+use Interop\Container\ContainerInterface;
 use SimpleBus\Message\Handler\Resolver\NameBasedMessageHandlerResolver;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use SimpleBus\Message\Handler\Resolver\MessageHandlerResolver;
 
-class CommandHandlerResolverFactory implements FactoryInterface
+class CommandHandlerResolverFactory
 {
-    /**
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return NameBasedMessageHandlerResolver
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container) : MessageHandlerResolver
     {
-        $commandBusConfig = $serviceLocator->get('simple_bus.command_bus.config');
+        $commandBusConfig = $container->get('simple_bus.command_bus.config');
         $commandNameResolverStrategy = $commandBusConfig['command_name_resolver_strategy'];
 
-        $commandNameResolver = $serviceLocator->get($commandNameResolverStrategy);
-        $commandHandlerMap   = $serviceLocator->get('simple_bus.command_bus.command_handler_map');
+        $commandNameResolver = $container->get($commandNameResolverStrategy);
+        $commandHandlerMap   = $container->get('simple_bus.command_bus.command_handler_map');
 
         return new NameBasedMessageHandlerResolver($commandNameResolver, $commandHandlerMap);
     }

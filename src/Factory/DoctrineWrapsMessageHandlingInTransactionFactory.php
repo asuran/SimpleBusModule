@@ -1,19 +1,16 @@
 <?php
 namespace Riskio\SimpleBusModule\Factory;
 
+use Doctrine\ORM\EntityManager;
+use Interop\Container\ContainerInterface;
 use Riskio\SimpleBusModule\Middleware\DoctrineWrapsMessageHandlingInTransaction;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
-class DoctrineWrapsMessageHandlingInTransactionFactory implements FactoryInterface
+class DoctrineWrapsMessageHandlingInTransactionFactory
 {
-    /**
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return DoctrineWrapsMessageHandlingInTransaction
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container) : MessageBusMiddleware
     {
-        $entityManager = $serviceLocator->get('Doctrine\ORM\EntityManager');
+        $entityManager = $container->get(EntityManager::class);
 
         return new DoctrineWrapsMessageHandlingInTransaction($entityManager);
     }

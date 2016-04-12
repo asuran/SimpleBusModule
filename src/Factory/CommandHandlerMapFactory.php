@@ -1,21 +1,19 @@
 <?php
 namespace Riskio\SimpleBusModule\Factory;
 
+use Interop\Container\ContainerInterface;
 use SimpleBus\Message\CallableResolver\CallableMap;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
-class CommandHandlerMapFactory implements FactoryInterface
+class CommandHandlerMapFactory
 {
-    /**
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return CallableMap
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container)
     {
-        $commandBusConfig = $serviceLocator->get('simple_bus.command_bus.config');
-        $callableResolver = $serviceLocator->get('simple_bus.command_bus.callable_resolver');
+        $commandBusConfig = $container->get('simple_bus.command_bus.config');
+        $callableResolver = $container->get('simple_bus.command_bus.callable_resolver');
 
-        return new CallableMap($commandBusConfig['command_map'], $callableResolver);
+        return new CallableMap(
+            $commandBusConfig['command_map'],
+            $callableResolver
+        );
     }
 }

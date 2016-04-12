@@ -1,19 +1,15 @@
 <?php
 namespace Riskio\SimpleBusModule\Factory;
 
+use Interop\Container\ContainerInterface;
+use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 use SimpleBus\Message\Handler\DelegatesToMessageHandlerMiddleware;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
-class DelegatesToMessageHandlerMiddlewareFactory implements FactoryInterface
+class DelegatesToMessageHandlerMiddlewareFactory
 {
-    /**
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return DelegatesToMessageHandlerMiddleware
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container) : MessageBusMiddleware
     {
-        $commandHandlerResolver = $serviceLocator->get('simple_bus.command_bus.command_handler_resolver');
+        $commandHandlerResolver = $container->get('simple_bus.command_bus.command_handler_resolver');
 
         return new DelegatesToMessageHandlerMiddleware(
             $commandHandlerResolver

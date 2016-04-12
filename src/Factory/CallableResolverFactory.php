@@ -1,21 +1,16 @@
 <?php
 namespace Riskio\SimpleBusModule\Factory;
 
+use Interop\Container\ContainerInterface;
 use SimpleBus\Message\CallableResolver\CallableResolver;
 use SimpleBus\Message\CallableResolver\ServiceLocatorAwareCallableResolver;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
-class CallableResolverFactory implements FactoryInterface
+class CallableResolverFactory
 {
-    /**
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return CallableResolver
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container) : CallableResolver
     {
-        return new ServiceLocatorAwareCallableResolver(function ($serviceId) use ($serviceLocator) {
-            $handler = $serviceLocator->get($serviceId);
+        return new ServiceLocatorAwareCallableResolver(function ($serviceId) use ($container) {
+            $handler = $container->get($serviceId);
 
             return [$handler, 'handle'];
         });
