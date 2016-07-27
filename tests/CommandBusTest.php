@@ -1,26 +1,26 @@
 <?php
 namespace Riskio\SimpleBusModuleTest;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
 use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\Config;
 
 class CommandBusTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetCommandBusFromServiceManagerShouldReturnMessageBusInstanceWithMiddlewares()
     {
         $config = include __DIR__ . '/../config/module.config.php';
-        $serviceManager = new ServiceManager(new Config($config['service_manager']));
+        $serviceManager = new ServiceManager($config['service_manager']);
         $serviceManager->setService('Config', $config);
 
-        $logger = $this->getMock(LoggerInterface::class);
+        $logger = $this->createMock(LoggerInterface::class);
         $serviceManager->setService('logger', $logger);
 
-        $entityManager = $this->getMock(EntityManagerInterface::class);
-        $serviceManager->setService('Doctrine\ORM\EntityManager', $entityManager);
+        $entityManager = $this->createMock(EntityManagerInterface::class);
+        $serviceManager->setService(EntityManager::class, $entityManager);
 
         /* @var $commandBus MessageBusSupportingMiddleware */
         $commandBus = $serviceManager->get('command_bus');
