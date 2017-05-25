@@ -21,7 +21,7 @@
             "Riskio\\SimpleBusModule\\": "src/"
         },
         "classmap": [
-            "Module.php"
+            "./Module.php"
         ]
     },
     "autoload-dev": {
